@@ -17,15 +17,15 @@ app.use('/api/auth',authRoutes)
 app.use('/api/media',musicRoutes)
 const port = process.env.PORT || 8080;
 
+const __name = path.resolve()
+
+app.use(express.static(path.join(__name, "frontend","build")));
 
 app.use((req,res,next)=>{
     console.log(req.path,req.method)
     next()
 })
 
-const __name = path.resolve()
-
-app.use(express.static(path.join(__name, "frontend","build")));
 
 app.get('*',(req,res)=>{
     res.sendFile(path.join(__name,"frontend","build","index.html"));
